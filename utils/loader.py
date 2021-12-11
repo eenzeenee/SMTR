@@ -38,9 +38,10 @@ class RapDataset(Dataset):
     def cos_threshold(self, data):
 
         label_col = 'cos_sim'
-        threshold = 0.0
+        threshold_start = 0.7
+        threshold_end = 0.9
         if label_col in data.columns:
-            return data[data[label_col] >= threshold]
+            return data[(data[label_col] >= threshold_start) & (data[label_col] <= threshold_end)]
 
         else:
             return data
