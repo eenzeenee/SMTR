@@ -1,4 +1,4 @@
-# SMTR
+# Show Me The Rhyme
 ## 2021-2 `자연어처리와 딥러닝 프로젝트`
 
 
