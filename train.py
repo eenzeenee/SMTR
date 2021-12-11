@@ -3,19 +3,19 @@ import logging
 import os
 
 from pytorch_lightning import loggers as pl_loggers
-from model.kobart_rap import *
-from utils.loader import RapDataModule
+from model.rhyme_generator import *
+from utils.loader import RhymeDataModule
 
 
 
-parser = argparse.ArgumentParser(description='Korean Rap')
+parser = argparse.ArgumentParser(description='Korean Rhyme')
 
 
 parser.add_argument('--checkpoint_path',
                     type=str,
                     help='checkpoint path')
 
-parser.add_argument('--rap',
+parser.add_argument('--rhyme',
                     action='store_true',
                     default=False,
                     help='response generation on given user input')
@@ -63,14 +63,14 @@ class ArgsBase():
 if __name__ == '__main__':
     parser = Base.add_model_specific_args(parser)
     parser = ArgsBase.add_model_specific_args(parser)
-    parser = RapDataModule.add_model_specific_args(parser)
+    parser = RhymeDataModule.add_model_specific_args(parser)
     parser = pl.Trainer.add_argparse_args(parser)
     args = parser.parse_args()
     logging.info(args)
 
     model = KoBARTConditionalGeneration(args)
 
-    dm = RapDataModule(args.train_file,
+    dm = RhymeDataModule(args.train_file,
                         args.test_file,
                         os.path.join(args.tokenizer_path, 'model.json'),
                         max_seq_len=args.max_seq_len,
@@ -83,20 +83,20 @@ if __name__ == '__main__':
                                                        save_last=True,
                                                        mode='min',
                                                        save_top_k=-1,
-                                                       prefix='rap-kobart-full')
+                                                       prefix='rhyme-kobart-full')
     tb_logger = pl_loggers.TensorBoardLogger(os.path.join(args.default_root_dir, 'tb_logs'))
     lr_logger = pl.callbacks.LearningRateMonitor()
     trainer = pl.Trainer.from_argparse_args(args, logger=tb_logger,
                                             callbacks=[checkpoint_callback, lr_logger])
     trainer.fit(model, dm)
 
-    model.model.save_pretrained('pretrained_dir/rap-kobart-model')
+    model.model.save_pretrained('pretrained_dir/rhyme-kobart-model')
 
 
-    if args.rap:
+    if args.rhyme:
         model.model.eval()
         while 1:
             q = input('context > ').strip()
             if q == 'quit':
                 break
-            print("Rap  > {}".format(model.rap(q)))
+            print("Rhyme  > {}".format(model.rhyme(q)))

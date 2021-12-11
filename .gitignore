@@ -1,0 +1,19 @@
+# data
+data/match.csv
+data/train_7_9.csv
+data/test_7_9.csv
+
+# tokenizer
+emji_tokenizer/
+
+# cache
+model/__pycache__/
+utils/__pycache__/
+
+# pretrained model
+*.zip
+kobart_from_pretrained/
+pretrained_dir/
+
+# log
+logs/

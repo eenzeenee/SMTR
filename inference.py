@@ -1,18 +1,18 @@
 import argparse
 import logging
 import os
-from model.kobart_rap import *
+from model.rhyme_generator import *
 
 
 
-parser = argparse.ArgumentParser(description='Korean Rap')
+parser = argparse.ArgumentParser(description='Korean Rhyme')
 
 
 parser.add_argument('--checkpoint_path',
                     type=str,
                     help='checkpoint path')
 
-parser.add_argument('--rap',
+parser.add_argument('--rhyme',
                     action='store_true',
                     default=False,
                     help='response generation on given user input')
@@ -65,10 +65,10 @@ if __name__ == '__main__':
 
 
 
-    if args.rap:
+    if args.rhyme:
         model.model.eval()
         while 1:
             q = input('context > ').strip()
             if q == 'quit':
                 break
-            print("Rap  > {}".format(model.rap(q)))
+            print("Rhyme  > {}".format(model.rhyme(q)))

@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 
-class RapDataset(Dataset):
+class RhymeDataset(Dataset):
     def __init__(self, filepath, tok_vocab, max_seq_len=128) -> None:
         self.filepath = filepath
         self.data = self.cos_threshold(pd.read_csv(self.filepath))
@@ -70,7 +70,7 @@ class RapDataset(Dataset):
                 'labels': np.array(labels, dtype=np.int_)}
 
 
-class RapDataModule(pl.LightningDataModule):
+class RhymeDataModule(pl.LightningDataModule):
     def __init__(self, train_file,
                  test_file, tok_vocab,
                  max_seq_len=128,
@@ -97,10 +97,10 @@ class RapDataModule(pl.LightningDataModule):
     # OPTIONAL, called for every GPU/machine (assigning state is OK)
     def setup(self, stage):
         # split dataset
-        self.train = RapDataset(self.train_file_path,
+        self.train = RhymeDataset(self.train_file_path,
                                  self.tok_vocab,
                                  self.max_seq_len)
-        self.test = RapDataset(self.test_file_path,
+        self.test = RhymeDataset(self.test_file_path,
                                 self.tok_vocab,
                                 self.max_seq_len)
 
