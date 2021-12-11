@@ -6,4 +6,4 @@
 #        --train_file hiphop_data/train.csv --test_file hiphop_data/test.csv
 
 
-python inference.py --model_path logs/rap-kobart-last.ckpt
+python inference.py --model_path pretrained_dir/rap-kobart-model
