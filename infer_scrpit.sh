@@ -6,4 +6,4 @@
 #        --train_file hiphop_data/train.csv --test_file hiphop_data/test.csv
 
 
-python inference.py --model_path pretrained_dir/rap-kobart-model
+python inference.py --model_path pretrained_dir/rap-kobart-model --tokenizer_path emji_tokenizer --rap
