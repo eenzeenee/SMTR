@@ -1,5 +1,7 @@
 # Show Me The Rhyme
 ## 2021-2 `자연어처리와 딥러닝 프로젝트`
+### presentation link
+- https://drive.google.com/file/d/19h2H4Pssenb4C0zb4dAOQpp36ELtF3uu/view?usp=sharing
 
 
 ----
